@@ -8,10 +8,12 @@ class Like(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     postId = db.Column(db.Integer, db.ForeignKey('posts.id'))
     answerId = db.Column(db.Integer, db.ForeignKey('answers.id'))
+    commentId = db.Column(db.Integer, db.ForeignKey('comments.id'))
 
     user = db.relationship('User', back_populates='likes')
     post = db.relationship('Post', back_populates='likes')
     answer = db.relationship('Answer', back_populates='likes')
+    comment = db.relationship('Comment', back_populates='likes')
 
 
     def to_dict(self):
@@ -19,5 +21,6 @@ class Like(db.Model):
             'id': self.id,
             'userId': self.userId,
             'postId': self.postId,
-            'answerId': self.answerId
+            'answerId': self.answerId,
+            'commentId': self.commentId
         }
