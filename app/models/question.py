@@ -1,5 +1,7 @@
 from .db import db
-from sqlalchemy import DateTime, now
+from sqlalchemy import DateTime
+from sqlalchemy.sql.functions import now
+
 
 
 class Question(db.Model):
@@ -7,7 +9,7 @@ class Question(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
-    topicName = db.Column(db.String(20), nullable=False)
+    topicName = db.Column(db.String(20), db.ForeignKey('topics.title'), nullable=False)
     content = db.Column(db.Text, nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(DateTime(timezone=True), server_default=now())

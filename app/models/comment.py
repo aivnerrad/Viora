@@ -1,6 +1,6 @@
 from .db import db
-from sqlalchemy import DateTime, now
-
+from sqlalchemy import DateTime
+from sqlalchemy.sql.functions import now
 
 class Comment(db.Model):
     __tablename__ = 'comments'
