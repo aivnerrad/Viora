@@ -57,6 +57,6 @@ def seed_questions():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_topics():
+def undo_questions():
     db.session.execute('TRUNCATE questions RESTART IDENTITY CASCADE;')
     db.session.commit()
