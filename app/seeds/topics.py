@@ -17,8 +17,8 @@ def seed_topics():
         title='Work', coverPhoto="https://cdn.pixabay.com/photo/2016/11/21/15/13/work-harder-1845901_960_720.jpg")
     Travel = Topic(
         title='Travel', coverPhoto="https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg")
-    HobbiesAndHealth = Topic(
-        title='Hobbies and Health', coverPhoto="https://cdn.pixabay.com/photo/2018/02/04/09/09/brushes-3129361_960_720.jpg")
+    Hobbies_And_Health = Topic(
+        title='Hobbies And Health', coverPhoto="https://cdn.pixabay.com/photo/2018/02/04/09/09/brushes-3129361_960_720.jpg")
     db.session.add(Weather)
     db.session.add(Entertainment)
     db.session.add(Sports)
@@ -26,7 +26,7 @@ def seed_topics():
     db.session.add(Food)
     db.session.add(Work)
     db.session.add(Travel)
-    db.session.add(HobbiesAndHealth)
+    db.session.add(Hobbies_And_Health)
     db.session.commit()
 
 
