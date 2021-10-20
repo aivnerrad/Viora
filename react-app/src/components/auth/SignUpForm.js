@@ -1,22 +1,74 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import UploadPicture from '../UploadPicture';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [image, setImage] = useState(null);
   const [email, setEmail] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [profilePic, setProfilePic] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory(); // so that we can redirect after the image upload is successful
+
+
+
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("image", image);
+
+      // aws uploads can be a bit slow—displaying
+      // some sort of loading message is a good idea
+      setImageLoading(true);
+
+      const res = await fetch('/api/images', {
+          method: "POST",
+          body: formData,
+      });
+      if (res.ok) {
+          await res.json();
+          setImageLoading(false);
+          history.push("/images");
+      }
+      else {
+          setImageLoading(false);
+          // a real app would probably use more advanced
+          // error handling
+          console.log("error");
+      }
+  }
+
+  const updateImage = (e) => {
+      const file = e.target.files[0];
+      setImage(file);
+  }
+
+  return (
+      <form id="image-upload" onSubmit={handleSubmit}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={updateImage}
+          />
+          <button id="image-upload" type="submit">Submit</button>
+          {(imageLoading)&& <p>Loading...</p>}
+      </form>
+  )
+
+
+
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    console.log("profilePic =========>>>>>", profilePic)
     if (password === repeatPassword) {
       const data = await dispatch(signUp(firstName, email, password));
       if (data) {
@@ -24,10 +76,6 @@ const SignUpForm = () => {
       }
     }
   };
-
-  const updateProfilePic = (e) => {
-    setProfilePic(e.target.files[0])
-  }
 
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -52,8 +100,7 @@ const SignUpForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-  const profilePicture = document.getElementById("profilePic")
-  console.log("PROFILE PICTURE ELEMENT =======>>>", profilePic)
+
   return (
     <form onSubmit={onSignUp}>
       <div>
@@ -90,7 +137,7 @@ const SignUpForm = () => {
       </div>
       <div>
         <label>Profile Picture</label>
-        <input type="file" id="profilePic" accept="image/png, image/gif, image/jpeg" onChange={updateProfilePic} />
+        <UploadPicture />
       </div>
       <div>
         <label>Password</label>

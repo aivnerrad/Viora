@@ -6,3 +6,4 @@ from .question import Question
 from .comment import Comment
 from .answer import Answer
 from .like import Like
+from .image import Image

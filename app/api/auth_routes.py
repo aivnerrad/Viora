@@ -1,10 +1,8 @@
 from flask import Blueprint, jsonify, session, request
-from app import app
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
-from flask_uploads import configure_uploads, IMAGES, UploadSet
 auth_routes = Blueprint('auth', __name__)
 
 
@@ -62,15 +60,12 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    profile_pictures = UploadSet("profile_pictures", IMAGES)
-    configure_uploads = (app, profile_pictures)
     if form.validate_on_submit():
-        picture_name = profile_pictures.save(form.profilePic.data)
         user = User(
             firstName=form.data['firstName'],
             lastName=form.data['lastName'],
             aboutMe=form.data['aboutMe'],
-            profilePic=picture_name,
+            profilePic=form.data['profilePic'],
             email=form.data['email'],
             password=form.data['password']
         )

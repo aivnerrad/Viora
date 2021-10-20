@@ -5,7 +5,7 @@ class Image(db.Model):
     __tablename__ = "images"
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Integer, db.ForeignKey("users.email"))
+    email = db.Column(db.String, db.ForeignKey("users.email"))
     url = db.Column(db.String, nullable=False)
 
     user = db.relationship("User", back_populates="images")
