@@ -2,7 +2,7 @@ from app.models import db, Topic
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_topicss():
+def seed_topics():
     Weather = Topic(
         title='Weather', coverPhoto="https://cdn.pixabay.com/photo/2015/11/22/15/16/lightning-1056419_960_720.jpg")
     Entertainment = Topic(
@@ -36,5 +36,5 @@ def seed_topicss():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_topics():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE topics RESTART IDENTITY CASCADE;')
     db.session.commit()
