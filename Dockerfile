@@ -10,6 +10,7 @@ ENV REACT_APP_BASE_URL=https://viora-app.herokuapp.com/
 RUN npm install
 RUN npm run build
 
+
 FROM python:3.9
 
 # Setup Flask environment
