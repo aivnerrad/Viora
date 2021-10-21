@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import UploadPicture from '../UploadPicture';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -17,63 +16,22 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const history = useHistory(); // so that we can redirect after the image upload is successful
 
-
-
-
-  const handleSubmit = async (e) => {
+    const onSignUp = async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append("image", image);
-
-      // aws uploads can be a bit slow—displaying
-      // some sort of loading message is a good idea
-      setImageLoading(true);
-
-      const res = await fetch('/api/images', {
-          method: "POST",
-          body: formData,
-      });
-      if (res.ok) {
-          await res.json();
-          setImageLoading(false);
-          history.push("/images");
-      }
-      else {
-          setImageLoading(false);
-          // a real app would probably use more advanced
-          // error handling
-          console.log("error");
-      }
-  }
-
-  const updateImage = (e) => {
-      const file = e.target.files[0];
-      setImage(file);
-  }
-
-  return (
-      <form id="image-upload" onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={updateImage}
-          />
-          <button id="image-upload" type="submit">Submit</button>
-          {(imageLoading)&& <p>Loading...</p>}
-      </form>
-  )
-
-
-
-
-
-  const onSignUp = async (e) => {
-    e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(firstName, email, password));
-      if (data) {
-        setErrors(data)
-      }
+      if (password === repeatPassword) {
+        const data = await dispatch(signUp(firstName, lastName, email, password));
+        if (data) {
+          setErrors(data)
+        }
+        // const formData = new FormData();
+        // formData.append("image", image);
+        // const res = await fetch('/api/images', {
+        //     method: "POST",
+        //     body: formData,
+        // });
+        // if (res.ok) {
+        //     await res.json();
+        // }
     }
   };
 
@@ -87,6 +45,11 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   const updatePassword = (e) => {
@@ -134,10 +97,6 @@ const SignUpForm = () => {
           onChange={updateEmail}
           value={email}
         ></input>
-      </div>
-      <div>
-        <label>Profile Picture</label>
-        <UploadPicture />
       </div>
       <div>
         <label>Password</label>

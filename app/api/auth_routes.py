@@ -65,7 +65,6 @@ def sign_up():
             firstName=form.data['firstName'],
             lastName=form.data['lastName'],
             aboutMe=form.data['aboutMe'],
-            profilePic=form.data['profilePic'],
             email=form.data['email'],
             password=form.data['password']
         )
