@@ -1,34 +1,78 @@
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    background-color: white;
+    width: 100%;
 }
 
 #home-button {
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(185,43,39);
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(185, 43, 39);
 }
 
 #home-button:hover {
-  transition-property: opacity;
-  transition-duration: .3s;
-  opacity: 0.7
+    transition-property: opacity;
+    transition-duration: .3s;
+    opacity: 0.7
 }
 
-#home-icon-div {
-  height: 30px;
-  width: 30px;
-  color: rgb(185,43,39)
+#icon-div {
+    height: 30px;
+    width: 30px;
 }
 
-#home-icon {
-  height: 28px;
-  width: 28px;
-  color: rgb(185,43,39)
+#icon {
+    height: 28px;
+    width: 28px;
+    color: rgb(185, 43, 39)
+}
+
+#search-bar-div {
+    height: 70%;
+    width: 25%;
+    border: .5px solid #dedede;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dedede;
+}
+
+#search-bar-div:hover {
+    border: .5px solid blue;
+    transition-property: border;
+    transition-duration: .2s;
+}
+
+#search-bar {
+    height: 80%;
+    width: 90%;
+    border: none;
+    padding: 5px;
+}
+#search-bar::placeholder {
+    color: rgba(153, 153, 153, 0.8);
+}
+
+#search-bar:focus {
+    border: none;
+    outline: none;
+}
+
+#my-profile-circle-div {
+    background-color: teal;
+    border-radius: 25px;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
