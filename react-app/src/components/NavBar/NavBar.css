@@ -61,6 +61,11 @@ nav {
     color: rgba(153, 153, 153, 0.8);
 }
 
+#search-bar:focus {
+    border: none;
+    outline: none;
+}
+
 #my-profile-circle-div {
     background-color: teal;
     border-radius: 25px;
