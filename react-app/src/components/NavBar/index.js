@@ -47,7 +47,7 @@ const NavBar = () => {
                 </div>
             }
             <div id='my-profile-circle-div'>
-                <p>{user.firstName[0]}</p>
+                <p>{user && user.firstName[0]}</p>
             </div>
             {user &&
                 <div>
