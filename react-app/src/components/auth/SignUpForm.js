@@ -1,33 +1,55 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [image, setImage] = useState(null);
   const [email, setEmail] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory(); // so that we can redirect after the image upload is successful
 
-  const onSignUp = async (e) => {
-    e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data)
-      }
+    const onSignUp = async (e) => {
+      e.preventDefault();
+      if (password === repeatPassword) {
+        const data = await dispatch(signUp(firstName, lastName, email, password));
+        if (data) {
+          setErrors(data)
+        }
+        // const formData = new FormData();
+        // formData.append("image", image);
+        // const res = await fetch('/api/images', {
+        //     method: "POST",
+        //     body: formData,
+        // });
+        // if (res.ok) {
+        //     await res.json();
+        // }
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   const updatePassword = (e) => {
@@ -50,12 +72,21 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label>First Name</label>
         <input
           type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={updateLastName}
+          value={lastName}
         ></input>
       </div>
       <div>

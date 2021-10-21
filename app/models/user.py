@@ -13,12 +13,12 @@ class User(db.Model, UserMixin):
     aboutMe = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_pic = db.Column(db.String(255))
     posts = db.relationship('Post', back_populates='user', cascade="all, delete")
     likes = db.relationship('Like', back_populates='user', cascade="all, delete")
     questions = db.relationship('Question', back_populates='user', cascade="all, delete")
     answers = db.relationship('Answer', back_populates='user', cascade="all, delete")
     comments = db.relationship('Comment', back_populates='user', cascade="all, delete")
+    images = db.relationship("Image", back_populates="user", cascade="all, delete")
 
     @property
     def password(self):
