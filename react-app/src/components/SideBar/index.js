@@ -19,7 +19,7 @@ const SideBar = () => {
         {topics && topics.map((topic) => {
           return (
             <div id="sidebar-topic-div">
-              <NavLink id="topic-button" to={`/api/topic/${topic.title}`} exact={true} activeClassName='active'>
+              <NavLink id="topic-button" to={`/topic/${topic.title}`} exact={true} activeClassName='active'>
                 <img id="topic-icon" src={topic.coverPhoto} alt="topic-icon"/><p>{topic.title}</p>
               </NavLink>
             </div>
