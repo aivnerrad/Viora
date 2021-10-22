@@ -27,7 +27,6 @@ class Question(db.Model):
             'content': self.content,
             'userId': self.userId,
             "user": self.user.to_dict(),
-            "topic": self.topic.to_dict(),
             "answers": [answer.to_dict() for answer in self.answers],
             "created_at": self.created_at,
             "updated_at": self.updated_at

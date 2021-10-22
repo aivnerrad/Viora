@@ -27,5 +27,6 @@ class Answer(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "user": self.user.to_dict(),
-            "question": self.question.to_dict()
+            "likes": [like.to_dict() for like in self.likes]
+
         }
