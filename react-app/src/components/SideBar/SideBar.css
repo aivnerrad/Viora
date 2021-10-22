@@ -23,6 +23,7 @@
   height: 20px;
   width: 20px;
   border-radius: 5px;
+  object-fit: cover;
 }
 
 #sidebar-topic-div {
