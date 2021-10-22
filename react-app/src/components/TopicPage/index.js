@@ -16,7 +16,7 @@ const TopicPage = () => {
       setTopic(topicObject)
       setPosts(topicObject.posts)
     })()
-  }, [])
+  }, [title])
   console.log("TITLE", title)
   console.log("TOPIC", topic)
   console.log("POSTS", posts)
