@@ -2,7 +2,7 @@ import boto3
 import botocore
 import os
 import uuid
-
+#RETURNS URL FOR IMAGE UPLOAD
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://profilepicturesbucket.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}

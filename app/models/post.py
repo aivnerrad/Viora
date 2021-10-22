@@ -27,7 +27,6 @@ class Post(db.Model):
             'content': self.content,
             'userId': self.userId,
             "user": self.user.to_dict(),
-            "topic": self.topic.to_dict(),
             "comments": [comment.to_dict() for comment in self.comments],
             "likes": [like.to_dict() for like in self.likes],
             "created_at": self.created_at,

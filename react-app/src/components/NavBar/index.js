@@ -11,7 +11,7 @@ const NavBar = () => {
     const user = useSelector(state => state.session.user)
     return (
         <nav>
-            <div>
+            <div id="home-button-div">
                 <NavLink id="home-button" to='/' exact={true} activeClassName='active'>
                     Viora
                 </NavLink>
