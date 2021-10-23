@@ -37,5 +37,6 @@ class User(db.Model, UserMixin):
             'firstName': self.firstName,
             'lastName': self.lastName,
             'aboutMe': self.aboutMe,
-            'email': self.email
+            'email': self.email,
+            'images': [image.to_dict() for image in self.images]
         }
