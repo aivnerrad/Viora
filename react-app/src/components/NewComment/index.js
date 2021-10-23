@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 import "./NewComment.css"
 
 const NewComment = ({post, title, setCanComment, setCommenting}) => {
@@ -33,7 +34,6 @@ const NewComment = ({post, title, setCanComment, setCommenting}) => {
         setCommenting(true)
       }else {
         const newComments = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
-        //console.log("NEW COMMENTS .JSON ======>>>>", newComments)
         setComments(newComments.comments)
         setCommenting(false)
       }
@@ -41,22 +41,27 @@ const NewComment = ({post, title, setCanComment, setCommenting}) => {
   }
 
   return (
-    <>
+    <div id="add-comment-section">
       <div style={{ color:'#F27D21'}}>
-                    {errors.map((error, ind) => (
-                    <li style={{ marginLeft:'15%', textAlign:'start'}}
-                            key={'newCommentErr'+ind}>{error}</li>
-                    ))}
-                </div>
+        {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
+      </div>
+      <NavLink to={`/users/${user.id}`} exact={true} >
+        <div id='add-comment-circle-div'>
+          <p>{user && user.firstName[0]}</p>
+        </div>
+      </NavLink>
     <form id="content-form" onSubmit={createComment}>
-      <textarea id="content-textarea"
-        name='content'
-        onChange={(e) => setContent(e.target.value)}
-        value={content}
-      ></textarea>
-      <button>Add Comment</button>
+      <div id="textarea-div">
+        <input id="content-input"
+          name='content'
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+          placeholder='Add a comment...'
+        ></input>
+      </div>
+      <button id="add-comment-button">Add Comment</button>
     </form>
-  </>
+  </div>
   );
 };
 
