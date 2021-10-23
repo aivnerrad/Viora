@@ -45,3 +45,39 @@
   border-radius: 25px;
   object-fit: cover;
 }
+
+#post-buttons {
+  display: flex;
+}
+
+#like-button {
+  background-color: #fafafa;
+  border: none;
+  border-radius: 15px;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#like-button:hover {
+  cursor: pointer;
+  background-color: #f1f1f1;
+}
+
+#comment-button {
+  background-color: inherit;
+  border: none;
+  border-radius: 15px;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#comment-button:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+}

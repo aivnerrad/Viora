@@ -50,7 +50,6 @@ const TopicPage = () => {
           </div>
         </div>
         {posts && posts.map(post => {
-          console.log("POST ======>>>", post)
           return (
             <>
             <div id="post">
@@ -62,26 +61,29 @@ const TopicPage = () => {
               <strong>{post.title}?</strong>
               <br/>
               {post.content}
-              <button id="like-button" onClick={() => setLiked(!liked)}>
-                <p><FontAwesomeIcon icon={faArrowUp} />{post.likes && post.likes.length}</p>
-              </button>
-              <button onClick={() => commentingHere(post.id)}>
-                <p><FontAwesomeIcon icon={faComment} />{post.comments && post.comments.length}</p>
-              </button>
+              <div id="post-buttons">
+                <button id="like-button" onClick={() => setLiked(!liked)}>
+                  <FontAwesomeIcon icon={faArrowUp} />
+                  <p>{post.likes && post.likes.length}</p>
+                </button>
+                <button id="comment-button" onClick={() => commentingHere(post.id)}>
+                  <FontAwesomeIcon icon={faComment} />
+                  <p>{post.comments && post.comments.length}</p>
+                </button>
+              </div>
               <div>
                 {(user && commenting && clicked === post.id) &&
                   <NewComment setCommenting={setCommenting} title={title} post={post} />
                 }
                 {(clicked === post.id) && post.comments.map(comment => {
-                  return (
-                  <>
+                  return (comment.user &&
+
                   <div id="comment-owner">
-                  <img id="profile-pic" src={comment.user.images[0].url} alt="profile" />
-                  <strong>{comment.user.firstName} {comment.user.lastName}</strong>
-                  <p>{comment.user.aboutMe}</p>
-                  <p>{comment.content}</p>
-              </div>
-                </>
+                    <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
+                    <strong>{comment.user.firstName} {comment.user.lastName}</strong>
+                    <p>{comment.user.aboutMe}</p>
+                    <p>{comment.content}</p>
+                  </div>
                 )})}
               </div>
             </div>
