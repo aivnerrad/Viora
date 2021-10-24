@@ -39,14 +39,14 @@ def create_comment(title, postId):
         return newComment.to_dict()
     else:
         return { 'errors': validation_errors_to_error_messages(formComment.errors)}, 400
-@topic_routes.route('/<title>/comments/<int:id>', methods=['PATCH'])
+@topic_routes.route('/<title>/<int:postId>/comments/<int:id>', methods=['PATCH'])
 @login_required
-def update_comment(id):
+def update_comment(title, postId, id):
     comment = Comment.query.get(id)
     formComment = EditCommentForm()
     formComment['csrf_token'].data = request.cookies['csrf_token']
     if formComment.validate_on_submit():
-        comment.comment = formComment.data['comment']
+        comment.content = formComment.data['content']
         db.session.commit()
         return comment.to_dict()
     else:

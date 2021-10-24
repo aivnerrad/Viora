@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import "./NewComment.css"
 
-const NewComment = ({post, title, setCanComment, setCommenting}) => {
+const NewComment = ({post, title, setCommenting}) => {
   const user = useSelector(state => state.session.user);
   const [comments, setComments] = useState([])
   const [content, setContent] = useState('');
@@ -39,7 +39,6 @@ const NewComment = ({post, title, setCanComment, setCommenting}) => {
       }
     return data
   }
-
   return (
     <div id="add-comment-section">
       <div style={{ color:'#F27D21'}}>
