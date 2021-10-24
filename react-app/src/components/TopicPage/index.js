@@ -6,6 +6,8 @@ import { faArrowUp, faComment } from '@fortawesome/free-solid-svg-icons'
 import './TopicPage.css'
 import NewComment from '../NewComment';
 import { useSelector } from 'react-redux';
+import CommentSettingsModal from '../CommentSettingsModal';
+import EditComment from '../EditComment';
 
 const TopicPage = () => {
 
@@ -14,8 +16,10 @@ const TopicPage = () => {
   const [topic, setTopic] = useState({})
   const [posts, setPosts] = useState([])
   const [commenting, setCommenting] = useState(false)
+  const [editing, setEditing] = useState(false)
   const [clicked, setClicked] = useState(-1)
   const [liked, setLiked] = useState(false)
+  const [deleted, setDeleted] = useState(false)
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -23,8 +27,9 @@ const TopicPage = () => {
       const topicObject = topicData.topic[0]
       setTopic(topicObject)
       setPosts(topicObject.posts)
+      setDeleted(false)
     })()
-  }, [title])
+  }, [title, commenting, editing, deleted])
   console.log("TITLE", title)
   console.log("TOPIC", topic)
   console.log("POSTS", posts)
@@ -82,7 +87,9 @@ const TopicPage = () => {
                     <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
                     <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                     <p>{comment.user.aboutMe}</p>
-                    <p>{comment.content}</p>
+                    {(comment.userId !== user.id || !editing) && <p>{comment.content}</p>}
+                    {(comment.userId === user.id && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
+                    {(comment.userId === user.id && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
                   </div>
                 )})}
               </div>
