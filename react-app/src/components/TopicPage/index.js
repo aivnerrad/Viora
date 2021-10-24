@@ -2,11 +2,11 @@ import React, { useState , useEffect} from 'react';
 import { useParams } from 'react-router';
 import SideBar from '../SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faComment } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faComment, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import './TopicPage.css'
 import NewComment from '../NewComment';
 import { useSelector } from 'react-redux';
-import CommentSettingsModal from '../CommentSettingsModal';
+import CommentSettingsBox from '../CommentSettingsBox';
 import EditComment from '../EditComment';
 
 const TopicPage = () => {
@@ -21,6 +21,7 @@ const TopicPage = () => {
   const [editedCommentId, setEditedCommentId] = useState(-1)
   const [liked, setLiked] = useState(false)
   const [deleted, setDeleted] = useState(false)
+  const [showEditBox, setShowEditBox] = useState(false)
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -97,9 +98,10 @@ const TopicPage = () => {
                       <div id="bottom-box">
                         {((user && comment.userId !== user.id) || (!editing || editedCommentId !== comment.id)) && <p id="comment">{comment.content}</p>}
                         <div id="bottom-of-the-bottom">
-                          {((user && comment.userId === user.id) && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                          {((user && comment.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => setShowEditBox(!showEditBox) }><FontAwesomeIcon icon={faEllipsisH} /></button>}
+                          {((user && comment.userId === user.id) && !editing && showEditBox) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
                         </div>
-                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
+                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} setShowEditBox={setShowEditBox}/>}
                       </div>
                   </div>
                 )})}

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import "./CommentSettingsBox.css"
 
-
-function CommentSettingsForm({ title, comment, post, setShowModal, setEditing, setDeleted, setEditedCommentId }) {
+function CommentSettingsBox({ title, comment, post, setEditing, setDeleted, setEditedCommentId }) {
   const [comments, setComments] = useState([])
   console.log("SETDELETED ------>>>", setDeleted)
   const openEditTextArea = () => {
     setEditing(true)
-    setShowModal(false)
     setEditedCommentId(comment.id)
   }
 
@@ -15,16 +14,15 @@ function CommentSettingsForm({ title, comment, post, setShowModal, setEditing, s
       method: 'DELETE'
     })
     const newComments = await fetch(`/api/topic/${title}/${post.id}/comments`).then((res) => res.json())
-    setShowModal(false)
     setDeleted(true)
     return setComments(newComments.comments)
   }
 
   return (
-    <>
-      <button onClick={() => deleteComment()}>Delete</button>
-      <button onClick={() => openEditTextArea()}>Edit Comment</button>
-    </>
+    <div id="comment-settings-box">
+      <button onClick={() => deleteComment()}><p id="button-text">Delete</p></button>
+      <button onClick={() => openEditTextArea()}><p id="button-text">Edit Comment</p></button>
+    </div>
   );
 }
-export default CommentSettingsForm;
+export default CommentSettingsBox;
