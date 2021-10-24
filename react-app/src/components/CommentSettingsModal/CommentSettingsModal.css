@@ -1,0 +1,12 @@
+#edit-comment-button {
+  background-color: #fafafa;
+  border: none;
+  border-radius: 50%;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+}
+
+#edit-comment-button:hover {
+  background-color: #f1f1f1;
+}

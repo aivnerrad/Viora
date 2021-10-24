@@ -18,6 +18,7 @@ const TopicPage = () => {
   const [commenting, setCommenting] = useState(false)
   const [editing, setEditing] = useState(false)
   const [clicked, setClicked] = useState(-1)
+  const [editedCommentId, setEditedCommentId] = useState(-1)
   const [liked, setLiked] = useState(false)
   const [deleted, setDeleted] = useState(false)
   useEffect(() => {
@@ -79,24 +80,28 @@ const TopicPage = () => {
                   <p>{post.comments && post.comments.length}</p>
                 </button>
               </div>
-              <div>
+              <div id="comments-section">
                 {(user && commenting && clicked === post.id) &&
                   <NewComment setCommenting={setCommenting} title={title} post={post} />
                 }
                 {(clicked === post.id) && post.comments.map(comment => {
                   return (comment.user &&
-                    <>
+                    <div id="comment-box">
                       <div id="owner">
-                        <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
+                        <img id="profile-pic" src={comment.user.images[0].url} alt="profile" />
                         <div id="owner-text">
                           <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                           <p id="owner-bio">{comment.user.aboutMe}</p>
                         </div>
                       </div>
-                        {((user && comment.userId !== user.id) || !editing) && <p id="comment">{comment.content}</p>}
-                        {((user && comment.userId === user.id) && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
-                        {((user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
-                  </>
+                      <div id="bottom-box">
+                        {((user && comment.userId !== user.id) || (!editing || editedCommentId !== comment.id)) && <p id="comment">{comment.content}</p>}
+                        <div id="bottom-of-the-bottom">
+                          {((user && comment.userId === user.id) && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                        </div>
+                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
+                      </div>
+                  </div>
                 )})}
               </div>
             </div>

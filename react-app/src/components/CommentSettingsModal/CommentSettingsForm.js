@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 
-function CommentSettingsForm({ title, comment, post, setShowModal, setEditing, setDeleted }) {
+function CommentSettingsForm({ title, comment, post, setShowModal, setEditing, setDeleted, setEditedCommentId }) {
   const [comments, setComments] = useState([])
   console.log("SETDELETED ------>>>", setDeleted)
   const openEditTextArea = () => {
     setEditing(true)
     setShowModal(false)
+    setEditedCommentId(comment.id)
   }
 
   const deleteComment = async () => {
