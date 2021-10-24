@@ -57,15 +57,18 @@ const TopicPage = () => {
         {posts && posts.map(post => {
           return (
             <>
-            <div id="post">
-              <div id="post-owner">
+            <div id="post-container">
+              <div id="owner">
                 <img id="profile-pic" src={post.user.images[0].url} alt="profile" />
-                <strong>{post.user.firstName} {post.user.lastName}</strong>
-                <p>{post.user.aboutMe}</p>
+                <div id="owner-text">
+                  <strong>{post.user.firstName} {post.user.lastName}</strong>
+                  <p id="owner-bio">{post.user.aboutMe}</p>
+                </div>
               </div>
-              <strong>{post.title}?</strong>
-              <br/>
-              {post.content}
+              <div id="post">
+                <strong><p id="post-title">{post.title}?</p></strong>
+                <span>{post.content}</span>
+              </div>
               <div id="post-buttons">
                 <button id="like-button" onClick={() => setLiked(!liked)}>
                   <FontAwesomeIcon icon={faArrowUp} />
@@ -82,15 +85,18 @@ const TopicPage = () => {
                 }
                 {(clicked === post.id) && post.comments.map(comment => {
                   return (comment.user &&
-
-                  <div id="comment-owner">
-                    <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
-                    <strong>{comment.user.firstName} {comment.user.lastName}</strong>
-                    <p>{comment.user.aboutMe}</p>
-                    {(comment.userId !== user.id || !editing) && <p>{comment.content}</p>}
-                    {(comment.userId === user.id && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
-                    {(comment.userId === user.id && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
-                  </div>
+                    <>
+                      <div id="owner">
+                        <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
+                        <div id="owner-text">
+                          <strong>{comment.user.firstName} {comment.user.lastName}</strong>
+                          <p id="owner-bio">{comment.user.aboutMe}</p>
+                        </div>
+                      </div>
+                        {((user && comment.userId !== user.id) || !editing) && <p id="comment">{comment.content}</p>}
+                        {((user && comment.userId === user.id) && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
+                        {((user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
+                  </>
                 )})}
               </div>
             </div>

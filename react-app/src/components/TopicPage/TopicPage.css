@@ -29,7 +29,7 @@
   padding-left: 10px;
 }
 
-#post {
+#post-container {
   background-color: white;
   border: .5px solid #e4e4e4;
   border-radius: 5px;
@@ -38,13 +38,40 @@
   flex-direction: column;
 }
 
-#post:hover {
+#post {
+  margin: 0px 15px;
+}
+
+#post-title {
+  margin: 0;
+}
+
+#post-container:hover {
   background-color: #fafafa;
 }
 
-#post-owner {
+#owner {
   padding: 8px;
+  display: flex;
+  align-items: center;
+  height: 50px;
 }
+
+#owner-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+#owner-bio {
+  margin: 0;
+  color: #555;
+
+}
+
 #profile-pic {
   height: 40px;
   width: 40px;
@@ -55,6 +82,11 @@
 #post-buttons {
   display: flex;
   margin-top: 6px;
+}
+
+#comment {
+  margin: 0;
+
 }
 
 #like-button {
