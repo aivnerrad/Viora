@@ -19,6 +19,7 @@ const TopicPage = () => {
   const [editing, setEditing] = useState(false)
   const [clicked, setClicked] = useState(-1)
   const [liked, setLiked] = useState(false)
+  const [deleted, setDeleted] = useState(false)
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -26,8 +27,9 @@ const TopicPage = () => {
       const topicObject = topicData.topic[0]
       setTopic(topicObject)
       setPosts(topicObject.posts)
+      setDeleted(false)
     })()
-  }, [title, commenting, editing])
+  }, [title, commenting, editing, deleted])
   console.log("TITLE", title)
   console.log("TOPIC", topic)
   console.log("POSTS", posts)
@@ -86,7 +88,7 @@ const TopicPage = () => {
                     <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                     <p>{comment.user.aboutMe}</p>
                     {(comment.userId !== user.id || !editing) && <p>{comment.content}</p>}
-                    {(comment.userId === user.id && !editing) && <CommentSettingsModal  setEditing={setEditing}/>}
+                    {(comment.userId === user.id && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
                     {(comment.userId === user.id && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
                   </div>
                 )})}

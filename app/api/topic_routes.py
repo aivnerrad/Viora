@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Topic, Comment, db
 from app.forms import CreateCommentForm, EditCommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -39,6 +39,7 @@ def create_comment(title, postId):
         return newComment.to_dict()
     else:
         return { 'errors': validation_errors_to_error_messages(formComment.errors)}, 400
+
 @topic_routes.route('/<title>/<int:postId>/comments/<int:id>', methods=['PATCH'])
 @login_required
 def update_comment(title, postId, id):
@@ -51,3 +52,14 @@ def update_comment(title, postId, id):
         return comment.to_dict()
     else:
         return { 'errors': validation_errors_to_error_messages(formComment.errors)}, 400
+
+@topic_routes.route('/<title>/<int:postId>/comments/<int:id>', methods=['DELETE'])
+@login_required
+def delete_comment(title, postId, id):
+    comment = Comment.query.get(id)
+    if comment.userId != current_user.to_dict()['id'] or not comment:
+        return {'errors': ['No authorization.']}, 401
+
+    db.session.delete(comment)
+    db.session.commit()
+    return {'message': ['Delete Successfully']}

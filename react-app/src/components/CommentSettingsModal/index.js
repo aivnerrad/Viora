@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import CommentSettingsForm from './CommentSettingsForm';
 
-function CommentSettingsModal({ setEditing }) {
+function CommentSettingsModal({ comment, post, title, setEditing, setDeleted }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function CommentSettingsModal({ setEditing }) {
       <button onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faEllipsisH} /></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CommentSettingsForm setShowModal={setShowModal} setEditing={setEditing}/>
+          <CommentSettingsForm setShowModal={setShowModal}comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>
         </Modal>
       )}
     </>
