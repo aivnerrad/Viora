@@ -103,10 +103,10 @@ const TopicPage = () => {
                       <div id="bottom-box">
                         {((user && comment.userId !== user.id) || (!editing || editedCommentId !== comment.id)) && <p id="comment">{comment.content}</p>}
                         <div id="bottom-of-the-bottom">
-                          {((user && comment.userId === user.id) && !editing && showing && commentClicked === comment.id) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                          {((user && comment.userId === user.id) && !editing && showing && commentClicked === comment.id) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId} />}
                           {((user && comment.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showBox(comment.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
                         </div>
-                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
+                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} setEditedCommentId={setEditedCommentId} setShowing={setShowing}/>}
                       </div>
                   </div>
                 )})}

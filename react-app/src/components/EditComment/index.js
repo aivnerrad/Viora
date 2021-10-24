@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import "./EditComment.css"
-const EditComment = ({ comment, post, title, setEditing, setShowEditBox}) => {
+const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, setShowing}) => {
     const user = useSelector(state => state.session.user);
     const [content, setContent] = useState(comment.content);
     const [errors , setErrors] = useState([])
@@ -32,7 +32,8 @@ const EditComment = ({ comment, post, title, setEditing, setShowEditBox}) => {
         }else {
           const newComments = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
           setEditing(false)
-          setShowEditBox(false)
+          setEditedCommentId(-1)
+          setShowing(false)
         }
       return data
     }
