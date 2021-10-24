@@ -1,11 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Topic, Comment, db
+from app.models import Topic, Comment, db, Like
 from app.forms import CreateCommentForm, EditCommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
 topic_routes = Blueprint('topic', __name__)
-
 
 @topic_routes.route('')
 def topics():
@@ -17,9 +16,24 @@ def topic(title):
     topic = Topic.query.filter_by(title = title).first()
     return {'topic': [topic.to_dict()]}
 
+@topic_routes.route('/<title>/<int:postId>/like', methods=['POST'])
+@login_required
+def create_post_like(title, postId):
+    post_liked = Like.query.filter_by(postId=postId, userId=current_user.to_dict()['id']).first()
+
+    if not post_liked:
+        like = Like(postId=postId, userId=current_user.to_dict()['id'])
+        db.session.add(like)
+        db.session.commit()
+        return {'like': [like.to_dict()]}
+    else:
+        db.session.delete(post_liked)
+        db.session.commit()
+        return {'message': 'Post Like Removed'}
+
 @topic_routes.route('/<title>/<int:postId>/comments')
 def comments(title, postId):
-    comments = Comment.query.filter_by(postId = Comment.postId).all()
+    comments = Comment.query.filter_by(postId = postId).all()
     print("COMMENTS ========>>>>", comments)
     return {'comments': [comment.to_dict() for comment in comments]}
 
@@ -63,3 +77,18 @@ def delete_comment(title, postId, id):
     db.session.delete(comment)
     db.session.commit()
     return {'message': ['Delete Successfully']}
+
+@topic_routes.route('/<title>/<int:postId>/comments/<int:commentId>/like', methods=['POST'])
+@login_required
+def create_comment_like(title, postId, commentId):
+    comment_liked = Like.query.filter_by(commentId=commentId, userId=current_user.to_dict()['id']).first()
+
+    if not comment_liked:
+        like = Like(commentId=commentId, userId=current_user.to_dict()['id'])
+        db.session.add(like)
+        db.session.commit()
+        return {'like': [like.to_dict()]}
+    else:
+        db.session.delete(comment_liked)
+        db.session.commit()
+        return {'message': 'Post Like Removed'}
