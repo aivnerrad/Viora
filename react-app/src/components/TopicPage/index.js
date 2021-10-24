@@ -2,11 +2,11 @@ import React, { useState , useEffect} from 'react';
 import { useParams } from 'react-router';
 import SideBar from '../SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faComment } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faComment, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import './TopicPage.css'
 import NewComment from '../NewComment';
 import { useSelector } from 'react-redux';
-import CommentSettingsModal from '../CommentSettingsModal';
+import CommentSettingsBox from '../CommentSettingsBox';
 import EditComment from '../EditComment';
 
 const TopicPage = () => {
@@ -17,9 +17,12 @@ const TopicPage = () => {
   const [posts, setPosts] = useState([])
   const [commenting, setCommenting] = useState(false)
   const [editing, setEditing] = useState(false)
-  const [clicked, setClicked] = useState(-1)
+  const [postClicked, setPostClicked] = useState(-1)
+  const [commentClicked, setCommentClicked] = useState(-1)
+  const [editedCommentId, setEditedCommentId] = useState(-1)
   const [liked, setLiked] = useState(false)
   const [deleted, setDeleted] = useState(false)
+  const [showing, setShowing] = useState(false)
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -35,13 +38,17 @@ const TopicPage = () => {
   console.log("POSTS", posts)
 
   const commentingHere = (postId) => {
-    if(clicked === postId && commenting === true){
+    if(postClicked === postId && commenting === true){
       setCommenting(false)
-      setClicked(-1)
+      setPostClicked(-1)
     } else {
       setCommenting(true)
-      setClicked(postId)
+      setPostClicked(postId)
     }
+  }
+  const showBox = (id) => {
+    setShowing(!showing)
+    setCommentClicked(id)
   }
 
   return (
@@ -79,24 +86,29 @@ const TopicPage = () => {
                   <p>{post.comments && post.comments.length}</p>
                 </button>
               </div>
-              <div>
-                {(user && commenting && clicked === post.id) &&
+              <div id="comments-section">
+                {(user && commenting && postClicked === post.id) &&
                   <NewComment setCommenting={setCommenting} title={title} post={post} />
                 }
-                {(clicked === post.id) && post.comments.map(comment => {
+                {(postClicked === post.id) && post.comments.map(comment => {
                   return (comment.user &&
-                    <>
+                    <div id="comment-box">
                       <div id="owner">
-                        <img id="profile-pic" src={comment.user.images && comment.user.images[0].url} alt="profile" />
+                        <img id="profile-pic" src={comment.user.images[0].url} alt="profile" />
                         <div id="owner-text">
                           <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                           <p id="owner-bio">{comment.user.aboutMe}</p>
                         </div>
                       </div>
-                        {((user && comment.userId !== user.id) || !editing) && <p id="comment">{comment.content}</p>}
-                        {((user && comment.userId === user.id) && !editing) && <CommentSettingsModal  comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted}/>}
-                        {((user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
-                  </>
+                      <div id="bottom-box">
+                        {((user && comment.userId !== user.id) || (!editing || editedCommentId !== comment.id)) && <p id="comment">{comment.content}</p>}
+                        <div id="bottom-of-the-bottom">
+                          {((user && comment.userId === user.id) && !editing && showing && commentClicked === comment.id) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                          {((user && comment.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showBox(comment.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
+                        </div>
+                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
+                      </div>
+                  </div>
                 )})}
               </div>
             </div>

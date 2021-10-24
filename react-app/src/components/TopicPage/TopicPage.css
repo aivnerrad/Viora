@@ -50,6 +50,26 @@
   background-color: #fafafa;
 }
 
+#comments-section {
+  background-color: #fafafa;
+}
+
+#comment-box {
+  padding-bottom: 20px;
+  border-bottom: .5px solid #dedede;
+}
+
+#bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#bottom-of-the-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 #owner {
   padding: 8px;
   display: flex;
@@ -85,7 +105,8 @@
 }
 
 #comment {
-  margin: 0;
+  margin: 0 15px;
+
 
 }
 
