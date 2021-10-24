@@ -18,9 +18,6 @@
   justify-content: flex-start;
   width: 130px;
   height: 60px;
-  position: absolute;
-  bottom: 170px;
-  right: 120px;
   border: .5px solid #dedede;
   box-shadow: 0 0 2px #dedede;
 }

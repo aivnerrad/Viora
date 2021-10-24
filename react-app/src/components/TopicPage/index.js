@@ -17,11 +17,12 @@ const TopicPage = () => {
   const [posts, setPosts] = useState([])
   const [commenting, setCommenting] = useState(false)
   const [editing, setEditing] = useState(false)
-  const [clicked, setClicked] = useState(-1)
+  const [postClicked, setPostClicked] = useState(-1)
+  const [commentClicked, setCommentClicked] = useState(-1)
   const [editedCommentId, setEditedCommentId] = useState(-1)
   const [liked, setLiked] = useState(false)
   const [deleted, setDeleted] = useState(false)
-  const [showEditBox, setShowEditBox] = useState(false)
+  const [showing, setShowing] = useState(false)
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -37,13 +38,17 @@ const TopicPage = () => {
   console.log("POSTS", posts)
 
   const commentingHere = (postId) => {
-    if(clicked === postId && commenting === true){
+    if(postClicked === postId && commenting === true){
       setCommenting(false)
-      setClicked(-1)
+      setPostClicked(-1)
     } else {
       setCommenting(true)
-      setClicked(postId)
+      setPostClicked(postId)
     }
+  }
+  const showBox = (id) => {
+    setShowing(!showing)
+    setCommentClicked(id)
   }
 
   return (
@@ -82,10 +87,10 @@ const TopicPage = () => {
                 </button>
               </div>
               <div id="comments-section">
-                {(user && commenting && clicked === post.id) &&
+                {(user && commenting && postClicked === post.id) &&
                   <NewComment setCommenting={setCommenting} title={title} post={post} />
                 }
-                {(clicked === post.id) && post.comments.map(comment => {
+                {(postClicked === post.id) && post.comments.map(comment => {
                   return (comment.user &&
                     <div id="comment-box">
                       <div id="owner">
@@ -98,10 +103,10 @@ const TopicPage = () => {
                       <div id="bottom-box">
                         {((user && comment.userId !== user.id) || (!editing || editedCommentId !== comment.id)) && <p id="comment">{comment.content}</p>}
                         <div id="bottom-of-the-bottom">
-                          {((user && comment.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => setShowEditBox(!showEditBox) }><FontAwesomeIcon icon={faEllipsisH} /></button>}
-                          {((user && comment.userId === user.id) && !editing && showEditBox) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                          {((user && comment.userId === user.id) && !editing && showing && commentClicked === comment.id) &&  <CommentSettingsBox comment={comment} title={title} post={post} setEditing={setEditing} setDeleted={setDeleted} setEditedCommentId={setEditedCommentId}/>}
+                          {((user && comment.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showBox(comment.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
                         </div>
-                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} setShowEditBox={setShowEditBox}/>}
+                        {((editedCommentId === comment.id) && (user && comment.userId === user.id) && editing) && <EditComment comment={comment} post={post} setEditing={setEditing} title={title} />}
                       </div>
                   </div>
                 )})}

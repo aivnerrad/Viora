@@ -67,7 +67,8 @@
 
 #bottom-of-the-bottom {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 #owner {
   padding: 8px;
