@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Topic, Comment, db, Like, Post
-from app.forms import CreateCommentForm, EditCommentForm, CreatePostForm
+from app.forms import CreateCommentForm, EditCommentForm, CreatePostForm, EditPostForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
 topic_routes = Blueprint('topic', __name__)
@@ -15,6 +15,20 @@ def topics():
 def topic(title):
     topic = Topic.query.filter_by(title = title).first()
     return {'topic': [topic.to_dict()]}
+
+@topic_routes.route('/<title>/<int:postId>', methods=['PATCH'])
+@login_required
+def update_post(title, postId):
+    post = Post.query.get(postId)
+    formPost = EditPostForm()
+    formPost['csrf_token'].data = request.cookies['csrf_token']
+    if formPost.validate_on_submit():
+        post.title = formPost.data['title']
+        post.content = formPost.data['content']
+        db.session.commit()
+        return post.to_dict()
+    else:
+        return { 'errors': validation_errors_to_error_messages(formPost.errors)}, 400
 
 @topic_routes.route('/<title>', methods=['POST'])
 @login_required
@@ -33,8 +47,6 @@ def create_post(title):
         return newPost.to_dict()
     else:
         return { 'errors': validation_errors_to_error_messages(formPost.errors)}, 400
-
-
 
 @topic_routes.route('/<title>/<int:postId>', methods=['DELETE'])
 @login_required

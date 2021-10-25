@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import CommentSettingsBox from '../CommentSettingsBox';
 import EditComment from '../EditComment';
 import NewPost from '../NewPost';
+import EditPost from '../EditPost'
 import PostSettingsBox from '../PostSettingsBox';
 
 const TopicPage = () => {
@@ -117,8 +118,8 @@ const TopicPage = () => {
               <div id="edit-post-div">
               {((user && post.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showPostSettingsBox(post.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
               {((user && post.userId === user.id) && !editing && postShowing && postClicked === post.id) &&<PostSettingsBox title={title} post={post} setEditingPost={setEditingPost} setPostDeleted={setPostDeleted} setEditedPostId={setEditedPostId} />}
-              {((editedPostId === post.id) && (user && post.userId === user.id) && editing) && <EditPost post={post} post={post} setEditing={setEditing} title={title} setEditedCommentId={setEditedCommentId} setCommentShowing={setCommentShowing}/>}
               </div>
+              {((editedPostId === post.id) && (user && post.userId === user.id) && editingPost) && <EditPost post={post} setEditingPost={setEditingPost} title={title} setEditedPostId={setEditedPostId} setPostShowing={setPostShowing}/>}
               {((user && post.userId !== user.id) || (!editing || editedPostId !== post.id)) &&<div id="post">
                 <strong><p id="post-title">{post.title}?</p></strong>
                 <span>{post.content}</span>

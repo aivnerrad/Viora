@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import "./EditPost.css"
-const EditPost = ({ post, title, setEditing, setEditedPostId, setPostShowing}) => {
+const EditPost = ({ post, title, setEditingPost, setEditedPostId, setPostShowing}) => {
     const user = useSelector(state => state.session.user);
     const [postTitle, setPostTitle] = useState(post.title)
     const [content, setContent] = useState(post.content);
@@ -31,10 +31,10 @@ const EditPost = ({ post, title, setEditing, setEditedPostId, setPostShowing}) =
         const data = await postData.json()
         if(data.errors){
           setErrors(data.errors)
-          setEditing(true)
+          setEditingPost(true)
         }else {
           const newPosts = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
-          setEditing(false)
+          setEditingPost(false)
           setEditedPostId(-1)
           setPostShowing(false)
         }
