@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import "./EditComment.css"
-const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, setCommentShowing}) => {
+import "./EditPost.css"
+const EditPost = ({ post, title, setEditing, setEditedPostId, setPostShowing}) => {
     const user = useSelector(state => state.session.user);
-    const [content, setContent] = useState(comment.content);
+    const [postTitle, setPostTitle] = useState(post.title)
+    const [content, setContent] = useState(post.content);
     const [errors , setErrors] = useState([])
 
 
-    const updateComment = async(e) => {
+    const updatePost = async(e) => {
       e.preventDefault()
-      const newComment = {
+      const updatedPost = {
+        title: postTitle,
+        topicName: title,
         content,
         userId: user.id,
         postId: post.id
       }
 
-      const commentData = await fetch(`/api/topic/${title}/${post.id}/comments/${comment.id}`, {
+      const postData = await fetch(`/api/topic/${title}/${post.id}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          ...newComment
+          ...updatedPost
             }),
             headers: {
               "Content-Type": "application/json"
             }
         })
-        const data = await commentData.json()
+        const data = await postData.json()
         if(data.errors){
           setErrors(data.errors)
           setEditing(true)
         }else {
-          const newComments = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
+          const newPosts = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
           setEditing(false)
-          setEditedCommentId(-1)
-          setCommentShowing(false)
+          setEditedPostId(-1)
+          setPostShowing(false)
         }
       return data
     }
@@ -48,12 +51,16 @@ const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, set
           <p>{user && user.firstName[0]}</p>
         </div>
       </NavLink>
-    <form id="content-form" onSubmit={updateComment}>
+    <form id="content-form" onSubmit={updatePost}>
+    <div id="post-title-div">
+        <input type="text" placeholder="Post Title" value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
+      </div>
       <div id="textarea-div">
         <input id="content-input"
           name='content'
           onChange={(e) => setContent(e.target.value)}
           value={content}
+          placeholder='Say Something...'
         ></input>
       </div>
       <button id="add-comment-button">Update</button>
@@ -62,4 +69,4 @@ const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, set
   );
 };
 
-export default EditComment;
+export default EditPost;

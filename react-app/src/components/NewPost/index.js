@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { NavHashLink } from 'react-router-hash-link';
 import "./NewPost.css"
 
 const NewPost = ({title, postCreated, setPostCreated}) => {
   const user = useSelector(state => state.session.user);
+  const history = useHistory();
   const [posts, setPosts] = useState([])
   const [postTitle, setPostTitle] = useState('');
   const [content, setContent] = useState('');
@@ -12,7 +14,7 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
 
 
   const createPost = async(e) => {
-    e.preventDefault() //Do I really want this??
+    e.preventDefault()
     const newPost = {
       title: postTitle,
       topicName: title,
@@ -36,6 +38,7 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
         setPosts(newPosts.topic.posts)
       }
       setPostCreated(!postCreated)
+      history.push(`#last-post`)
       return data
   }
   return (
@@ -60,7 +63,7 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
           placeholder='Say Something...'
         ></input>
       </div>
-      <button id="add-comment-button">Add Post</button>
+        <button id="add-comment-button">Add Post</button>
     </form>
   </div>
   );
