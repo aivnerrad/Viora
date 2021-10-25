@@ -21,9 +21,7 @@ const NewComment = ({post, title, setCommenting}) => {
 
     const commentData = await fetch(`/api/topic/${title}/${post.id}/comments`, {
       method: 'POST',
-      body: JSON.stringify({
-        ...newComment
-          }),
+      body: JSON.stringify({...newComment}),
           headers: {
             "Content-Type": "application/json"
           }

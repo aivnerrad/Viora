@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./CommentSettingsBox.css"
 
-function CommentSettingsBox({ title, comment, post, setEditing, setDeleted, setEditedCommentId }) {
+function CommentSettingsBox({ title, comment, post, setEditing, setCommentDeleted, setEditedCommentId }) {
   const [comments, setComments] = useState([])
-  console.log("SETDELETED ------>>>", setDeleted)
+  console.log("SETDELETED ------>>>", setCommentDeleted)
   const openEditTextArea = () => {
     setEditing(true)
     setEditedCommentId(comment.id)
@@ -14,7 +14,7 @@ function CommentSettingsBox({ title, comment, post, setEditing, setDeleted, setE
       method: 'DELETE'
     })
     const newComments = await fetch(`/api/topic/${title}/${post.id}/comments`).then((res) => res.json())
-    setDeleted(true)
+    setCommentDeleted(true)
     return setComments(newComments.comments)
   }
 
