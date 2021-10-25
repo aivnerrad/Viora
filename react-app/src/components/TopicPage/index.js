@@ -8,6 +8,7 @@ import NewComment from '../NewComment';
 import { useSelector } from 'react-redux';
 import CommentSettingsBox from '../CommentSettingsBox';
 import EditComment from '../EditComment';
+import NewPost from '../NewPost';
 
 const TopicPage = () => {
 
@@ -17,6 +18,7 @@ const TopicPage = () => {
   const [posts, setPosts] = useState([])
   const [commenting, setCommenting] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [postCreated, setPostCreated] = useState(false)
   const [postClicked, setPostClicked] = useState(-1)
   const [commentClicked, setCommentClicked] = useState(-1)
   const [editedCommentId, setEditedCommentId] = useState(-1)
@@ -33,7 +35,7 @@ const TopicPage = () => {
       setPosts(topicObject.posts)
       setDeleted(false)
     })()
-  }, [title, commenting, editing, deleted, postLiked, commentLiked])
+  }, [title, commenting, editing, deleted, postLiked, commentLiked, postCreated])
   console.log("TITLE", title)
   console.log("TOPIC", topic)
   console.log("POSTS", posts)
@@ -83,6 +85,9 @@ const TopicPage = () => {
           <div id="topic-title-container">
             <h2>{title}</h2>
           </div>
+        </div>
+        <div id="add-post-box">
+          <NewPost title={title} postCreated={postCreated} setPostCreated={setPostCreated}/>
         </div>
         {posts && posts.map(post => {
           return (

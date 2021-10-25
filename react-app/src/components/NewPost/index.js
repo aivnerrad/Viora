@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import "./NewComment.css"
+import "./NewPost.css"
 
-const NewComment = ({post, title, setCommenting}) => {
+const NewPost = ({title, postCreated, setPostCreated}) => {
   const user = useSelector(state => state.session.user);
-  const [comments, setComments] = useState([])
+  const [posts, setPosts] = useState([])
+  const [postTitle, setPostTitle] = useState('');
   const [content, setContent] = useState('');
   const [errors , setErrors] = useState([])
 
 
-  const createComment = async(e) => {
-    e.preventDefault()
-    const newComment = {
+  const createPost = async(e) => {
+    e.preventDefault() //Do I really want this??
+    const newPost = {
+      title: postTitle,
+      topicName: title,
       content,
-      userId: user.id,
-      postId: post.id
+      userId: user.id
     }
-    post?.comments?.push(newComment)
 
-    const commentData = await fetch(`/api/topic/${title}/${post.id}/comments`, {
+    const commentData = await fetch(`/api/topic/${title}`, {
       method: 'POST',
-      body: JSON.stringify({...newComment}),
+      body: JSON.stringify({...newPost}),
           headers: {
             "Content-Type": "application/json"
           }
@@ -29,13 +30,13 @@ const NewComment = ({post, title, setCommenting}) => {
       const data = await commentData.json()
       if(data.errors){
         setErrors(data.errors)
-        setCommenting(true)
-      }else {
-        const newComments = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
-        setComments(newComments.comments)
-        setCommenting(false)
       }
-    return data
+      else {
+        const newPosts = await (await fetch(`/api/topic/${title}`)).json()
+        setPosts(newPosts.topic.posts)
+      }
+      setPostCreated(!postCreated)
+      return data
   }
   return (
     <div id="add-comment-section">
@@ -47,19 +48,22 @@ const NewComment = ({post, title, setCommenting}) => {
           <p>{user && user.firstName[0]}</p>
         </div>
       </NavLink>
-    <form id="content-form" onSubmit={createComment}>
+    <form id="post-form" onSubmit={createPost}>
+      <div id="post-title-div">
+        <input type="text" placeholder="Post Title" value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
+      </div>
       <div id="textarea-div">
         <input id="content-input"
           name='content'
           onChange={(e) => setContent(e.target.value)}
           value={content}
-          placeholder='Add a comment...'
+          placeholder='Say Something...'
         ></input>
       </div>
-      <button id="add-comment-button">Add Comment</button>
+      <button id="add-comment-button">Add Post</button>
     </form>
   </div>
   );
 };
 
-export default NewComment;
+export default NewPost;
