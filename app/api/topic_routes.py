@@ -35,6 +35,19 @@ def create_post(title):
         return { 'errors': validation_errors_to_error_messages(formPost.errors)}, 400
 
 
+
+@topic_routes.route('/<title>/<int:postId>', methods=['DELETE'])
+@login_required
+def delete_post(title, postId):
+    post = Post.query.get(postId)
+    if post.userId != current_user.to_dict()['id'] or not post:
+        return {'errors': ['No authorization.']}, 401
+
+    db.session.delete(post)
+    db.session.commit()
+    return {'message': ['Delete Successfully']}
+
+
 @topic_routes.route('/<title>/<int:postId>/like', methods=['POST'])
 @login_required
 def create_post_like(title, postId):
