@@ -28,12 +28,11 @@ const TopicPage = () => {
   const [editedPostId, setEditedPostId] = useState(-1)
   const [commentDeleted, setCommentDeleted] = useState(false)
   const [postDeleted, setPostDeleted] = useState(false)
-
   const [commentShowing, setCommentShowing] = useState(false)
   const [postShowing, setPostShowing] = useState(false)
-
   const [postLiked, setPostLiked] = useState(false)
   const [commentLiked, setCommentLiked] = useState(false)
+  
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
