@@ -43,7 +43,7 @@ const EditPost = ({ post, title, setEditingPost, setEditedPostId, setPostShowing
 
   return (
     <div id="add-comment-section">
-      <div style={{ color:'#F27D21'}}>
+      <div>
         {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
       </div>
       <NavLink to={`/users/${user.id}`} exact={true} >
@@ -51,9 +51,9 @@ const EditPost = ({ post, title, setEditingPost, setEditedPostId, setPostShowing
           <p>{user && user.firstName[0]}</p>
         </div>
       </NavLink>
-    <form id="content-form" onSubmit={updatePost}>
-    <div id="post-title-div">
-        <input type="text" placeholder="Post Title" value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
+    <form id="post-content-form" onSubmit={updatePost}>
+    <div id="textarea-div">
+        <input id="content-input" type="text" placeholder="Post Title" value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
       </div>
       <div id="textarea-div">
         <input id="content-input"

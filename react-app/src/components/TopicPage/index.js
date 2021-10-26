@@ -108,13 +108,14 @@ const TopicPage = () => {
           return (
             <>
             <div id="post-container">
+              {user &&
               <div id="owner">
                 <img id="profile-pic" src={post.user.images[0].url} alt="profile" />
                 <div id="owner-text">
-                  <strong>{post.user.firstName} {post.user.lastName}</strong>
-                  <p id="owner-bio">{post.user.aboutMe}</p>
+
+                 <p id="owner-bio">{post.user.aboutMe}</p>
                 </div>
-              </div>
+              </div>}
               <div id="edit-post-div">
               {((user && post.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showPostSettingsBox(post.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
               {((user && post.userId === user.id) && !editing && postShowing && postClicked === post.id) &&<PostSettingsBox title={title} post={post} setEditingPost={setEditingPost} setPostDeleted={setPostDeleted} setEditedPostId={setEditedPostId} />}
