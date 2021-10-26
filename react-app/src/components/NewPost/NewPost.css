@@ -1,3 +1,28 @@
+#add-post-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+  border: .5px solid #dedede;
+  margin-bottom: 22px;
+  box-shadow: 0 1px 1px #dedede;
+}
+
+#add-post-circle-div {
+  background-color: teal;
+    border-radius: 25px;
+    height: 22px;
+    width: 22px;
+    margin: 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
 #add-comment-section {
   display: flex;
   align-items: center;
@@ -5,6 +30,18 @@
   width: 100%;
   background-color: #fafafa;
   border-bottom: .5px solid #dedede;
+}
+
+#link-to-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+#post-owner-text {
+  color: #999;
+  font-size: 14px;
 }
 
 #post-form {
@@ -24,6 +61,13 @@
   background-color: white;
 }
 
+#button-div {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
 #content-input {
   display: flex;
   align-items: center;
@@ -35,8 +79,10 @@
 }
 
 #content-input::placeholder {
-  color: #b1b1b1;
+  color: #999;
+  font-weight: 700;
 }
+
 
 #content-input:focus {
   outline: none;

@@ -42,18 +42,18 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
       return data
   }
   return (
-    <div id="add-comment-section">
-      <div style={{ color:'#F27D21'}}>
-        {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
-      </div>
-      <NavLink to={`/users/${user.id}`} exact={true} >
-        <div id='add-comment-circle-div'>
+    <div id="add-post-section">
+      <NavLink id="link-to-user" to={`/users/${user.id}`} exact={true} >
+        <div id='add-post-circle-div'>
           <p>{user && user.firstName[0]}</p>
+        </div>
+        <div id='post-owner-text'>
+          {user && <p> {user.firstName} {user.lastName}</p>}
         </div>
       </NavLink>
     <form id="post-form" onSubmit={createPost}>
-      <div id="post-title-div">
-        <input type="text" placeholder="Post Title" value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
+      <div id="textarea-div">
+        <input id="content-input" type="text" placeholder="Post Title..." value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
       </div>
       <div id="textarea-div">
         <input id="content-input"
@@ -61,10 +61,15 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
           onChange={(e) => setContent(e.target.value)}
           value={content}
           placeholder='Say Something...'
-        ></input>
+          ></input>
       </div>
+      <div id="button-div">
         <button id="add-comment-button">Add Post</button>
+      </div>
     </form>
+  <div>
+    {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
+  </div>
   </div>
   );
 };

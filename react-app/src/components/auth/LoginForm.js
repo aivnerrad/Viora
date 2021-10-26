@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
+import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -38,34 +39,44 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <form id="login-form" onSubmit={onLogin}>
+      <div id="inner-form">
+      <div id="home-button-div">
+          <NavLink id="home-button" to='/' exact={true} activeClassName='active'>
+              Viora
+          </NavLink>
+        </div>
+        <br/>
+        <div id="input-errors">
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <div id="input">
+          <label htmlFor='email'>Email</label>
+          <input id="input-line"
+            name='email'
+            type='text'
+            placeholder='Email'
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div id="input">
+          <label htmlFor='password'>Password</label>
+          <input id="input-line"
+            name='password'
+            type='password'
+            placeholder='Enter Your Password...'
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <div id="login-demo-buttons-div">
+          <button id="login-button" type='submit'>Login</button>
+          <button id="demo-user-button" type="submit" onClick={enterDemoUser}>Demo User</button>
+        </div>
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-      <button type="submit" onClick={enterDemoUser}>Demo User</button>
     </form>
   );
 };
