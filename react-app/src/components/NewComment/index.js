@@ -39,7 +39,7 @@ const NewComment = ({post, title, setCommenting}) => {
   }
   return (
     <div id="add-comment-section">
-      <NavLink to={`/users/${user.id}`} exact={true} >
+      <NavLink to={`/`} exact={true} >
         <div id='add-comment-circle-div'>
           <p>{user && user.firstName[0]}</p>
         </div>

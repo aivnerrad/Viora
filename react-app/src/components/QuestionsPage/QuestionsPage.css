@@ -14,6 +14,15 @@
 
 #question-box {
   margin: 15px;
+  display: flex;
+}
+
+#delete-question-button {
+  margin: 15px;
+}
+
+#question-topicname-text {
+  font-size: 14px;
 }
 
 #answers-number {

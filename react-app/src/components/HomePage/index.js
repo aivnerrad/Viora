@@ -79,6 +79,7 @@ console.log("TITLE ======>>>", title)
     <div id="main-content">
       <SideBar />
       <div id="user-feed">
+        <h1> Welcome back, {user.firstName}!</h1>
         {feed && feed.map(post => {
           return (
             <>

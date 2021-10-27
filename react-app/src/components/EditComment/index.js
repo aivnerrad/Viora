@@ -43,7 +43,7 @@ const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, set
       <div style={{ color:'#F27D21'}}>
         {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
       </div>
-      <NavLink to={`/users/${user.id}`} exact={true} >
+      <NavLink to={`/`} exact={true} >
         <div id='add-comment-circle-div'>
           <p>{user && user.firstName[0]}</p>
         </div>

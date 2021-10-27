@@ -1,3 +1,7 @@
 #main-content {
   background-color: #f6f6f6;
 }
+
+#user-feed {
+  width: 600px;
+}

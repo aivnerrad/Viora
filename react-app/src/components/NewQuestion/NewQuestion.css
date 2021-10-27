@@ -43,8 +43,8 @@
   outline: none;
 }
 
-#add-comment-button {
-  background-color: #467aff;
+#add-question-button {
+  background-color: #B92B27;
   border: none;
   margin: 3px;
   border-radius: 15px;
@@ -75,5 +75,19 @@
 }
 
 #topic-dropdown{
-  width: 140px;
+  width: 200px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  background-color: #B92B27;
+  font-size: 12px;
+  border-radius: 15px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+}
+
+#topic-dropdown:focus {
+  outline: none;
+  font-size: 14px;
 }
