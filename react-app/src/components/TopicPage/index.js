@@ -109,7 +109,7 @@ const TopicPage = () => {
             <div id="post-container">
               {post.user &&
               <div id="owner">
-                <img id="profile-pic" onError={(e) => e.target.src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png"} src={post.user.images[0].url} alt="profile" />
+                {post.user.images && <img id="profile-pic" onError={(e) => e.target.src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png"} src={post.user.images[0].url} alt="profile" />}
                 <div id="owner-text">
 
                  <p id="owner-bio">{post.user.aboutMe}</p>
