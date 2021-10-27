@@ -112,7 +112,8 @@ console.log("TITLE ======>>>", title)
                   return (comment.user &&
                     <div id="comment-box">
                       <div id="owner">
-                        <img id="profile-pic" src={comment.user.images[0].url} alt="profile" />
+                      {comment.user.images.length > 0 && <img id="profile-pic" src={post.user.images[0].url} alt="profile" />}
+                      {comment.user.images.length === 0 && <img id="profile-pic" src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png" alt="profile" />}
                         <div id="owner-text">
                           <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                           <p id="owner-bio">{comment.user.aboutMe}</p>
