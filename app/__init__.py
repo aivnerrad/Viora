@@ -1,15 +1,19 @@
 import os
 from flask import Flask, render_template, request, session, redirect
+from flask.helpers import url_for
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+
+from app.models import question
 
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.topic_routes import topic_routes
 from .api.image_routes import image_routes
+from .api.question_routes import question_routes
 
 from .seeds import seed_commands
 
@@ -35,6 +39,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(topic_routes, url_prefix='/api/topic')
 app.register_blueprint(image_routes, url_prefix='/api/images')
+app.register_blueprint(question_routes, url_prefix='/api/questions')
 
 db.init_app(app)
 Migrate(app, db)

@@ -1,0 +1,78 @@
+#add-comment-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fafafa;
+  border-bottom: .5px solid #dedede;
+}
+
+#content-form {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#textarea-div {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: white;
+}
+
+#content-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 90%;
+  border: none;
+  resize: none;
+}
+
+#content-input::placeholder {
+  color: #b1b1b1;
+}
+
+#content-input:focus {
+  outline: none;
+}
+
+#add-comment-button {
+  background-color: #467aff;
+  border: none;
+  margin: 3px;
+  border-radius: 15px;
+  height: 30px;
+  width: 120px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+#add-comment-button:hover {
+  background-color: #2e69ff;
+
+}
+
+#add-comment-circle-div {
+  background-color: teal;
+    border-radius: 25px;
+    height: 35px;
+    width: 35px;
+    margin: 6px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#answers-number:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

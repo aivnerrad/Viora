@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PostSettingsBox.css"
 
-function PostSettingsBox({ title, post, setEditingPost, setPostDeleted, setEditedPostId }) {
+function PostSettingsBox({ title, post, setEditingPost, setPostDeleted, setEditedPostId}) {
   const [posts, setPosts] = useState([])
   const openEditTextArea = () => {
     setEditingPost(true)

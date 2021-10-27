@@ -28,12 +28,11 @@ const TopicPage = () => {
   const [editedPostId, setEditedPostId] = useState(-1)
   const [commentDeleted, setCommentDeleted] = useState(false)
   const [postDeleted, setPostDeleted] = useState(false)
-
   const [commentShowing, setCommentShowing] = useState(false)
   const [postShowing, setPostShowing] = useState(false)
-
   const [postLiked, setPostLiked] = useState(false)
   const [commentLiked, setCommentLiked] = useState(false)
+
   useEffect(() => {
     (async function topicsFetch() {
       const topicResponse = await fetch(`/api/topic/${title}`);
@@ -108,13 +107,14 @@ const TopicPage = () => {
           return (
             <>
             <div id="post-container">
+              {post.user &&
               <div id="owner">
                 <img id="profile-pic" src={post.user.images[0].url} alt="profile" />
                 <div id="owner-text">
-                  <strong>{post.user.firstName} {post.user.lastName}</strong>
-                  <p id="owner-bio">{post.user.aboutMe}</p>
+
+                 <p id="owner-bio">{post.user.aboutMe}</p>
                 </div>
-              </div>
+              </div>}
               <div id="edit-post-div">
               {((user && post.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showPostSettingsBox(post.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
               {((user && post.userId === user.id) && !editing && postShowing && postClicked === post.id) &&<PostSettingsBox title={title} post={post} setEditingPost={setEditingPost} setPostDeleted={setPostDeleted} setEditedPostId={setEditedPostId} />}
@@ -142,7 +142,7 @@ const TopicPage = () => {
                   return (comment.user &&
                     <div id="comment-box">
                       <div id="owner">
-                        <img id="profile-pic" src={comment.user.images[0].url} alt="profile" />
+                        <img id="profile-pic" src={comment.user.images[0].url || 'https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png'} alt="profile" />
                         <div id="owner-text">
                           <strong>{comment.user.firstName} {comment.user.lastName}</strong>
                           <p id="owner-bio">{comment.user.aboutMe}</p>

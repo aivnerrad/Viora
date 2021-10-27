@@ -10,6 +10,7 @@ import User from './components/MyProfile';
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
 import TopicPage from './components/TopicPage';
+import QuestionsPage from './components/QuestionsPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/answer' exact={true} >
+          <QuestionsPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
