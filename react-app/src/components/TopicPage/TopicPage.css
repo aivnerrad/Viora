@@ -90,7 +90,10 @@
 #owner-bio {
   margin: 0;
   color: #555;
+}
 
+#owner-name {
+  margin: 0;
 }
 
 #profile-pic {
