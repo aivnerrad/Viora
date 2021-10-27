@@ -45,7 +45,7 @@ const NewQuestion = ({question, setAnswering}) => {
         </div>
       </NavLink>
     <form id="content-form" onSubmit={createQuestion}>
-      <div id="textarea-div">
+      <div id="question-textarea-div">
         <input id="content-input"
           name='content'
           onChange={(e) => setContent(e.target.value)}
@@ -53,6 +53,7 @@ const NewQuestion = ({question, setAnswering}) => {
           placeholder='Ask Something...'
           ></input>
           <select onChange={(e) => setTopicName(e.target.value)} id="topic-dropdown" type="select">
+            <option value="" disabled selected>Pick a topic</option>
             <option value="Weather">Weather</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Sports">Sports</option>
