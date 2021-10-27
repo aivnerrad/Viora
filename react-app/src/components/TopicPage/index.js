@@ -101,7 +101,7 @@ const TopicPage = () => {
           </div>
         </div>
         <div id="add-post-box">
-          <NewPost title={title} postCreated={postCreated} setPostCreated={setPostCreated}/>
+          {user && <NewPost title={title} postCreated={postCreated} setPostCreated={setPostCreated}/>}
         </div>
         {posts && posts.map(post => {
           return (
@@ -109,7 +109,7 @@ const TopicPage = () => {
             <div id="post-container">
               {post.user &&
               <div id="owner">
-                <img id="profile-pic" src={post.user.images[0].url} alt="profile" />
+                <img id="profile-pic" src={post.user.images[0].url || 'https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png'} alt="profile" />
                 <div id="owner-text">
 
                  <p id="owner-bio">{post.user.aboutMe}</p>
