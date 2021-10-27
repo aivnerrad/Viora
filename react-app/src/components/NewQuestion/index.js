@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import "./NewQuestion.css"
 
-const NewQuestion = ({question, setAnswering}) => {
+const NewQuestion = ({question, asking, setAsking}) => {
   const user = useSelector(state => state.session.user);
   const [questions, setQuestions] = useState([])
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [errors , setErrors] = useState([]);
   const [topicName, setTopicName] = useState('');
@@ -15,25 +16,26 @@ const NewQuestion = ({question, setAnswering}) => {
     e.preventDefault()
     const newQuestion = {
       content,
+      title,
       topicName,
       userId: user.id,
     }
 
-    const commentData = await fetch(`/api/users/${question.id}/questions`, {
+    const questionData = await fetch(`/api/questions`, {
       method: 'POST',
       body: JSON.stringify({...newQuestion}),
           headers: {
             "Content-Type": "application/json"
           }
       })
-      const data = await commentData.json()
+      const data = await questionData.json()
       if(data.errors){
         setErrors(data.errors)
-        setAnswering(true)
+        setAsking(!asking)
       }else {
-        const newQuestions = await (await fetch(`/api/users/questions`)).json()
+        const newQuestions = await (await fetch(`/api/questions`)).json()
         setQuestions(newQuestions.questions)
-        setAnswering(false)
+        setAsking(!asking)
       }
     return data
   }
@@ -44,13 +46,19 @@ const NewQuestion = ({question, setAnswering}) => {
           <p>{user && user.firstName[0]}</p>
         </div>
       </NavLink>
-    <form id="content-form" onSubmit={createQuestion}>
+    <form id="content-form" onSubmit={createQuestion} autoComplete="off">
       <div id="question-textarea-div">
         <input id="content-input"
           name='content'
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          placeholder='Ask Something...'
+          ></input>
+          <input id="content-input"
+          name='content'
           onChange={(e) => setContent(e.target.value)}
           value={content}
-          placeholder='Ask Something...'
+          placeholder='Give us more details'
           ></input>
           <select onChange={(e) => setTopicName(e.target.value)} id="topic-dropdown" type="select">
             <option value="" disabled selected>Pick a topic</option>
@@ -67,7 +75,7 @@ const NewQuestion = ({question, setAnswering}) => {
             {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
           </div>
       </div>
-      <button id="add-comment-button">Ask Question</button>
+      <button id="add-question-button">Ask Question</button>
     </form>
   </div>
   );

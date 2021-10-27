@@ -12,6 +12,7 @@ nav {
     position: sticky;
     top: 0;
     border-bottom: .5px solid #dedede;
+    z-index: 1;
 }
 
 #home-button {
