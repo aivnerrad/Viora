@@ -40,12 +40,6 @@ function App() {
         <Route path='/topic/:title' exact={true}>
           <TopicPage />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
         </ProtectedRoute>

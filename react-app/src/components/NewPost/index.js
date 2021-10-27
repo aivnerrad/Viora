@@ -43,7 +43,7 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
   }
   return (
     <div id="add-post-section">
-      <NavLink id="link-to-user" to={`/users/${user.id}`} exact={true} >
+      <NavLink id="link-to-user" to={`/`} exact={true} >
         <div id='add-post-circle-div'>
           <p>{user && user.firstName[0]}</p>
         </div>

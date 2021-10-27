@@ -36,12 +36,15 @@ const NewQuestion = ({question, asking, setAsking}) => {
         const newQuestions = await (await fetch(`/api/questions`)).json()
         setQuestions(newQuestions.questions)
         setAsking(!asking)
+        setTitle("")
+        setContent("")
+        setTopicName("")
       }
     return data
   }
   return (
     <div id="add-comment-section">
-      <NavLink to={`/users/${user.id}`} exact={true} >
+      <NavLink to={`/`} exact={true} >
         <div id='add-comment-circle-div'>
           <p>{user && user.firstName[0]}</p>
         </div>

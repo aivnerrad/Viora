@@ -46,7 +46,7 @@ const NavBar = () => {
                     </NavLink>
                 </div>
             }
-            {user && <NavLink to={`/users/${user.id}`} exact={true} >
+            {user && <NavLink to={`/`} exact={true} >
             <div id='my-profile-circle-div'>
                 <p>{user && user.firstName[0]}</p>
             </div>

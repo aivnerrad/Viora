@@ -46,7 +46,7 @@ const EditPost = ({ post, title, setEditingPost, setEditedPostId, setPostShowing
       <div>
         {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
       </div>
-      <NavLink to={`/users/${user.id}`} exact={true} >
+      <NavLink to={`/`} exact={true} >
         <div id='add-comment-circle-div'>
           <p>{user && user.firstName[0]}</p>
         </div>
