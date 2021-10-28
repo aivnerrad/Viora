@@ -50,3 +50,16 @@ nav {
     color: white;
     font-size: 14px;
 }
+
+#nav-login-button {
+  background-color: #B92B27;
+  color: white;
+  width: 60px;
+  border-radius: 15px;
+  border: none;
+  height: 20px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
