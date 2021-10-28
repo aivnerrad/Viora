@@ -71,7 +71,7 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
       </div>
     </form>
   <div>
-    {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
+    {errors.map((error, ind) => (<span key={ind}>{error}<br/></span>))}
   </div>
   </div>
   );

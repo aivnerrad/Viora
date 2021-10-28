@@ -54,7 +54,7 @@ const NewAnswer = ({question, answering, setAnswering}) => {
           placeholder='Give us your answer...'
           ></input>
           <div>
-            {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
+            {errors.map((error, ind) => (<span key={ind}>{error}<br/></span>))}
           </div>
       </div>
       <button id="add-comment-button">Add Answer</button>

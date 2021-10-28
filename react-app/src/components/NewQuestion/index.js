@@ -76,7 +76,7 @@ const NewQuestion = ({question, asking, setAsking}) => {
             <option value="Hobbies And Health">Hobbies And Health</option>
           </select>
           <div>
-            {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
+            {errors.map((error, ind) => (<span key={ind}>{error}<br/></span>))}
           </div>
       </div>
       <button id="add-question-button">Ask Question</button>

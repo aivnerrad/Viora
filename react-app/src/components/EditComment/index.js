@@ -40,9 +40,6 @@ const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, set
 
   return (
     <div id="add-comment-section">
-      <div style={{ color:'#F27D21'}}>
-        {errors.map((error, ind) => (<li key={ind}>{error}</li>))}
-      </div>
       <NavLink to={`/`} exact={true} >
         <div id='add-comment-circle-div'>
           <p>{user && user.firstName[0]}</p>
@@ -55,6 +52,9 @@ const EditComment = ({ comment, post, title, setEditing, setEditedCommentId, set
           onChange={(e) => setContent(e.target.value)}
           value={content}
         ></input>
+      </div>
+      <div>
+        {errors.map((error, ind) => (<span key={ind}>{error}<br/></span>))}
       </div>
       <button id="add-comment-button">Update</button>
     </form>
