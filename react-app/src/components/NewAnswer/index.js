@@ -33,6 +33,8 @@ const NewAnswer = ({question, answering, setAnswering}) => {
         const newAnswers = await (await fetch(`/api/questions/${question.id}/answers`)).json()
         setAnswers(newAnswers.answers)
         setAnswering(!answering)
+        setContent("")
+        setErrors([])
       }
     return data
   }

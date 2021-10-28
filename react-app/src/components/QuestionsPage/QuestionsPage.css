@@ -19,6 +19,15 @@
 
 #delete-question-button {
   margin: 15px;
+  background-color: #dedede;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+#delete-question-button:hover {
+  background-color: #999;
 }
 
 #question-topicname-text {

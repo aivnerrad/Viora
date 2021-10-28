@@ -36,8 +36,11 @@ const NewPost = ({title, postCreated, setPostCreated}) => {
       else {
         const newPosts = await (await fetch(`/api/topic/${title}`)).json()
         setPosts(newPosts.topic.posts)
+        setPostCreated(!postCreated)
+        setContent("")
+        setPostTitle("")
+        setErrors([])
       }
-      setPostCreated(!postCreated)
       history.push(`#last-post`)
       return data
   }
