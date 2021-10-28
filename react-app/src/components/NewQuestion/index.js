@@ -39,6 +39,7 @@ const NewQuestion = ({question, asking, setAsking}) => {
         setTitle("")
         setContent("")
         setTopicName("")
+        setErrors([])
       }
     return data
   }

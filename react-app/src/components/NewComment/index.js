@@ -34,6 +34,7 @@ const NewComment = ({post, title, setCommenting}) => {
         const newComments = await (await fetch(`/api/topic/${title}/${post.id}/comments`)).json()
         setComments(newComments.comments)
         setCommenting(false)
+        setErrors([])
       }
     return data
   }
