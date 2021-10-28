@@ -5,7 +5,6 @@ import LogoutButton from '../auth/LogoutButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faEdit, faUsers } from '@fortawesome/free-solid-svg-icons'
 import './NavBar.css'
-import SearchBar from './SearchBar';
 
 const NavBar = () => {
     const user = useSelector(state => state.session.user)
@@ -28,9 +27,6 @@ const NavBar = () => {
             </div>
             <div id="icon-div" >
                 <FontAwesomeIcon id="icon" icon={faUsers}/>
-            </div>
-            <div id="search-bar-div" >
-                <SearchBar />
             </div>
             {!user &&
                 <div>
