@@ -85,7 +85,8 @@ console.log("TITLE ======>>>", title)
             <>
             <div id="post-container">
               <div id="owner">
-                <img id="profile-pic" src={post.user.images[0].url} alt="profile" />
+              {post.user.images.length > 0 && <img id="profile-pic" src={post.user.images[0].url} alt="profile" />}
+                {post.user.images.length === 0 && <img id="profile-pic" src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png" alt="profile" />}
                 <div id="owner-text">
                   <strong>{post.user.firstName} {post.user.lastName}</strong>
                   <p id="owner-bio">{post.user.aboutMe}</p>

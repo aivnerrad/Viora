@@ -32,7 +32,9 @@ label {
   font-weight: bold;
 }
 
-
+#input-line:focus {
+  outline: none;
+}
 
 #input-line {
   border: none;

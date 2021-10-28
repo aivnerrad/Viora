@@ -16,4 +16,4 @@ class SignUpForm(FlaskForm):
     lastName = StringField('lastName', validators=[DataRequired(message="Please enter a last name."), Length(-1, 50)])
     aboutMe = TextAreaField('aboutMe')
     email = StringField('email', validators=[DataRequired(message="Please enter an email address."), user_exists, Length(-1, 50)])
-    password = StringField('password', validators=[DataRequired(), Length(5, 17, message="Please enter a password of at least 6 characters. (Max: 16)")])
+    password = StringField('password', validators=[DataRequired("Please enter a password of at least 6 characters."), Length(5, 17, message="Please enter a password of at least 6 characters. (Max: 16)")])

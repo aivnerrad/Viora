@@ -19,22 +19,27 @@ const SignUpForm = () => {
 
     const onSignUp = async (e) => {
       e.preventDefault();
-      if (password === repeatPassword) {
-        const data = await dispatch(signUp(firstName, lastName, email, password));
-        if (data) {
-          setErrors(data)
+        if (firstName && lastName && email && password === repeatPassword){
+          const data = await dispatch(signUp(firstName, lastName, email, password));
+          console.log("DATA =======>>>", data)
+          if (data) {
+            setErrors(data)
+          }
+          // const formData = new FormData();
+          // formData.append("image", image);
+          // const res = await fetch('/api/images', {
+          //     method: "POST",
+          //     body: formData,
+          // });
+          // if (res.ok) {
+          //     await res.json();
+          // }
         }
-        // const formData = new FormData();
-        // formData.append("image", image);
-        // const res = await fetch('/api/images', {
-        //     method: "POST",
-        //     body: formData,
-        // });
-        // if (res.ok) {
-        //     await res.json();
-        // }
+        else if(firstName && lastName && email && password !== repeatPassword) {
+          setErrors(["Passwords do not match"])
       }
-  };
+      else setErrors(await dispatch(signUp(firstName, lastName, email, password)))
+    };
   console.log("ERRORS ======>>>", errors)
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -81,7 +86,7 @@ const SignUpForm = () => {
         </div>
         <div id="input">
           <label>First Name</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             type='text'
             name='firstName'
             placeholder="Enter Your First Name..."
@@ -91,7 +96,7 @@ const SignUpForm = () => {
         </div>
         <div id="input">
           <label>Last Name</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             type='text'
             name='lastName'
             placeholder="Enter Your Last Name..."
@@ -101,8 +106,8 @@ const SignUpForm = () => {
         </div>
         <div id="input">
           <label>Email</label>
-          <input id="input-line"
-            type='text'
+          <input id="input-line" autoComplete="off"
+            type='email'
             name='email'
             placeholder="Enter Your Email Address..."
             onChange={updateEmail}
@@ -111,7 +116,7 @@ const SignUpForm = () => {
         </div>
         <div id="input">
           <label>Password</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             type='password'
             name='password'
             placeholder="Enter A Password..."
@@ -121,7 +126,7 @@ const SignUpForm = () => {
         </div>
         <div id="input">
           <label>Repeat Password</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             type='password'
             name='repeat_password'
             placeholder="Confirm Your Password..."
