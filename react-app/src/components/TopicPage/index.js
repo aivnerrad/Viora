@@ -45,9 +45,6 @@ const TopicPage = () => {
 
     })()
   }, [title, commenting, editing, postLiked, commentLiked, postCreated, postDeleted, commentDeleted, editingPost])
-  console.log("TITLE", title)
-  console.log("TOPIC", topic)
-  console.log("POSTS", posts)
 
   const commentingHere = (postId) => {
     if(postClicked === postId && commenting === true){
@@ -69,7 +66,6 @@ const TopicPage = () => {
   }
 
   const likePost = async (e, postId) => {
-    console.log(e)
     e.preventDefault();
     if (user) {
       await fetch(`/api/topic/${title}/${postId}/like`, {
@@ -80,7 +76,6 @@ const TopicPage = () => {
     }
 
   const likeComment = async (e, postId, commentId) => {
-    console.log(e)
     e.preventDefault();
     if (user) {
       await fetch(`/api/topic/${title}/${postId}/comments/${commentId}/like`, {
@@ -109,7 +104,6 @@ const TopicPage = () => {
             <div id="post-container">
               {post.user &&
               <div id="owner">
-                {console.log("post.user", post.user)}
                 {post.user.images.length > 0 && <img id="profile-pic" src={post.user.images[0].url} alt="profile" />}
                 {post.user.images.length === 0 && <img id="profile-pic" src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png" alt="profile" />}
                 <div id="owner-text">

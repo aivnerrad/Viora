@@ -78,7 +78,6 @@ def create_post_like(title, postId):
 @topic_routes.route('/<title>/<int:postId>/comments')
 def comments(title, postId):
     comments = Comment.query.filter_by(postId = postId).all()
-    print("COMMENTS ========>>>>", comments)
     return {'comments': [comment.to_dict() for comment in comments]}
 
 @topic_routes.route('/<title>/<int:postId>/comments', methods=['POST'])

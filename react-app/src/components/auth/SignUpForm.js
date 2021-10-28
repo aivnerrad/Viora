@@ -21,26 +21,15 @@ const SignUpForm = () => {
       e.preventDefault();
         if (firstName && lastName && email && password === repeatPassword){
           const data = await dispatch(signUp(firstName, lastName, email, password));
-          console.log("DATA =======>>>", data)
           if (data) {
             setErrors(data)
           }
-          // const formData = new FormData();
-          // formData.append("image", image);
-          // const res = await fetch('/api/images', {
-          //     method: "POST",
-          //     body: formData,
-          // });
-          // if (res.ok) {
-          //     await res.json();
-          // }
         }
         else if(firstName && lastName && email && password !== repeatPassword) {
           setErrors(["Passwords do not match"])
-      }
+        }
       else setErrors(await dispatch(signUp(firstName, lastName, email, password)))
     };
-  console.log("ERRORS ======>>>", errors)
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
   };

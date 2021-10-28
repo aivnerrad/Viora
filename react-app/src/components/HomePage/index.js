@@ -61,7 +61,6 @@ const HomePage = () => {
     }
 
   const likeComment = async (e, post, commentId) => {
-    console.log(e)
     e.preventDefault();
     if (user) {
       setTitle(post.topicName)
@@ -72,9 +71,6 @@ const HomePage = () => {
       }
     }
 
-
-console.log("FEED =======>>>", feed)
-console.log("TITLE ======>>>", title)
   return (
     <div id="main-content">
       <SideBar />

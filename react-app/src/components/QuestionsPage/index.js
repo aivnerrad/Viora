@@ -52,7 +52,6 @@ const QuestionsPage = () => {
       setAnswerLiked(!answerLiked)
       }
     }
-  console.log("FEED ====>>>", feed)
 
   return (
     <div id="main-content">
