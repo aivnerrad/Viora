@@ -20,7 +20,6 @@ function User() {
   if (!user) {
     return null;
   }
-  console.log("USER ====>>", user)
   return (
     <>
     <ul>

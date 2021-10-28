@@ -3,7 +3,6 @@ import "./CommentSettingsBox.css"
 
 function CommentSettingsBox({ title, comment, post, setEditing, commentDeleted, setCommentDeleted, setEditedCommentId }) {
   const [comments, setComments] = useState([])
-  console.log("SETDELETED ------>>>", setCommentDeleted)
   const openEditTextArea = () => {
     setEditing(true)
     setEditedCommentId(comment.id)
