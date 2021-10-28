@@ -60,6 +60,8 @@ const SignUpForm = () => {
   }
 
   return (
+    <div id="page-height">
+    <div id="background">
     <form id="signup-form" onSubmit={onSignUp}>
       <div id="signup-inner-form">
         <div id="home-button-div">
@@ -67,6 +69,7 @@ const SignUpForm = () => {
               Viora
           </NavLink>
         </div>
+        <p><strong>Sign up to get your question answered!</strong></p>
         <br/>
         <div id="errors-div">
           {errors.map((error, ind) => (
@@ -125,8 +128,13 @@ const SignUpForm = () => {
           ></input>
         </div>
         <button id="login-button" type='submit'>Sign Up</button>
+        <div id="fake-quote">
+          <p id="fake-quote-text"><strong>"I love using Viora! I can find an answer to almost any question I ask!"</strong><br/><i>-"Actual Viora User"</i></p>
+        </div>
       </div>
     </form>
+  </div>
+  </div>
   );
 };
 
