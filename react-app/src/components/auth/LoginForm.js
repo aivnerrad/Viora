@@ -39,6 +39,8 @@ const LoginForm = () => {
   }
 
   return (
+    <div id="page-height">
+    <div id="background">
     <form id="login-form" onSubmit={onLogin}>
       <div id="inner-form">
       <div id="home-button-div">
@@ -47,6 +49,7 @@ const LoginForm = () => {
           </NavLink>
         </div>
         <p><strong>Where Your <u>Questions</u> Find <u>Answers</u>!</strong></p>
+        <p><strong>Sign up or log in to get your question answered!</strong></p>
         <br/>
         <div id="input-errors">
           {errors.map((error, ind) => (
@@ -77,11 +80,13 @@ const LoginForm = () => {
           <button id="login-button" type='submit'>Login</button>
           <button id="demo-user-button" type="submit" onClick={enterDemoUser}>Demo User</button>
         </div>
-      </div>
-      <div id="fake-quote">
-        <p id="fake-quote-text"><strong>"I love using Viora! I can find an answer to almost any question I ask!"</strong>-<i>"Actual Viora User"</i></p>
+        <div id="fake-quote">
+          <p id="fake-quote-text"><strong>"I love using Viora! I can find an answer to almost any question I ask!"</strong><br/><i>-"Actual Viora User"</i></p>
+        </div>
       </div>
     </form>
+  </div>
+  </div>
   );
 };
 
