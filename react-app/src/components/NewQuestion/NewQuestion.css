@@ -85,9 +85,14 @@
   height: 30px;
   display: flex;
   text-align: center;
+  cursor: pointer;
 }
 
 #topic-dropdown:focus {
   outline: none;
   font-size: 14px;
+}
+
+#topic-dropdown:hover {
+
 }
