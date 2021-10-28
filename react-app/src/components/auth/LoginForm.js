@@ -46,6 +46,7 @@ const LoginForm = () => {
               Viora
           </NavLink>
         </div>
+        <p><strong>Where Your <u>Questions</u> Find <u>Answers</u>!</strong></p>
         <br/>
         <div id="input-errors">
           {errors.map((error, ind) => (
@@ -76,6 +77,9 @@ const LoginForm = () => {
           <button id="login-button" type='submit'>Login</button>
           <button id="demo-user-button" type="submit" onClick={enterDemoUser}>Demo User</button>
         </div>
+      </div>
+      <div id="fake-quote">
+        <p id="fake-quote-text"><strong>"I love using Viora! I can find an answer to almost any question I ask!"</strong>-<i>"Actual Viora User"</i></p>
       </div>
     </form>
   );
