@@ -54,7 +54,7 @@ const LoginForm = () => {
         </div>
         <div id="input">
           <label htmlFor='email'>Email</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             name='email'
             type='text'
             placeholder='Email'
@@ -64,7 +64,7 @@ const LoginForm = () => {
         </div>
         <div id="input">
           <label htmlFor='password'>Password</label>
-          <input id="input-line"
+          <input id="input-line" autoComplete="off"
             name='password'
             type='password'
             placeholder='Enter Your Password...'
