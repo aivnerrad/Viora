@@ -91,7 +91,8 @@ const QuestionsPage = () => {
                     return ((answer.user && questionClickedId === question.id) &&
                       <div id="answer-box">
                         <div id="owner">
-                          <img id="profile-pic" src={answer.user.images[0].url} alt="profile" />
+                        {answer.user.images.length > 0 && <img id="profile-pic" src={answer.user.images[0].url} alt="profile" />}
+                {answer.user.images.length === 0 && <img id="profile-pic" src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png" alt="profile" />}
                           <div id="owner-text">
                             <strong>{answer.user.firstName} {answer.user.lastName}</strong>
                             <p id="owner-bio">{answer.user.aboutMe}</p>
