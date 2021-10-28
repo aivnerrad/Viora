@@ -59,3 +59,13 @@
 #about-me-links {
   padding-top: 30px;
 }
+
+#my-button {
+  background-color: #B92B27;
+  color: white;
+  width: 80px;
+  border-radius: 15px;
+  border: none;
+  height: 35px;
+  padding: 5px;
+}

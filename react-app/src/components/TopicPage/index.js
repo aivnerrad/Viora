@@ -117,10 +117,6 @@ const TopicPage = () => {
                   <p id="owner-bio">{post.user.aboutMe}</p>
                 </div>
               </div>}
-              <div id="edit-post-div">
-              {((user && post.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showPostSettingsBox(post.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
-              {((user && post.userId === user.id) && !editing && postShowing && postClicked === post.id) &&<PostSettingsBox title={title} post={post} setEditingPost={setEditingPost} setPostDeleted={setPostDeleted} setEditedPostId={setEditedPostId} />}
-              </div>
               {((editedPostId === post.id) && (user && post.userId === user.id) && editingPost) && <EditPost post={post} setEditingPost={setEditingPost} title={title} setEditedPostId={setEditedPostId} setPostShowing={setPostShowing}/>}
               {((user && post.userId !== user.id) || (!editing || editedPostId !== post.id)) &&<div id="post">
                 <strong><p id="post-title">{post.title}?</p></strong>
@@ -135,13 +131,16 @@ const TopicPage = () => {
                   <FontAwesomeIcon icon={faComment} />
                   <p>{post.comments && post.comments.length}</p>
                 </button>
+                <div id="edit-post-div">
+                  {((user && post.userId === user.id) && !editing) &&  <button id="edit-comment-button" onClick={() => showPostSettingsBox(post.id)}><FontAwesomeIcon icon={faEllipsisH} /></button>}
+                  {((user && post.userId === user.id) && !editing && postShowing && postClicked === post.id) &&<PostSettingsBox title={title} post={post} setEditingPost={setEditingPost} setPostDeleted={setPostDeleted} setEditedPostId={setEditedPostId} />}
+                </div>
               </div>
               <div id="comments-section">
                 {(user && commenting && postClicked === post.id) &&
                   <NewComment setCommenting={setCommenting} title={title} post={post} />
                 }
                 {(postClicked === post.id) && post.comments.map(comment => {
-                  console.log("COMMENT.USER ======>>>", comment.user)
                   return (comment.user &&
                     <div id="comment-box">
                       <div id="owner">
@@ -176,11 +175,6 @@ const TopicPage = () => {
             </>
           )
         })}
-        <div id="last-post">
-          <a href="#main-content">
-            Back to the top
-          </a>
-        </div>
       </div>
     </div>
   )
