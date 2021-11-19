@@ -11,6 +11,7 @@ def questions():
     question_list = Question.query.all()
     return {'questions': [question.to_dict() for question in question_list]}
 
+
 @question_routes.route('', methods=['POST'])
 @login_required
 def create_question():

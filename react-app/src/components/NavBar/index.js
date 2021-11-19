@@ -8,6 +8,7 @@ import './NavBar.css'
 
 const NavBar = () => {
     const user = useSelector(state => state.session.user)
+
     return (
         <nav>
             <div id="home-button-div">
