@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faEdit, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faEdit } from '@fortawesome/free-solid-svg-icons'
 import './NavBar.css'
 
 const NavBar = () => {
@@ -24,9 +24,6 @@ const NavBar = () => {
                 <NavLink to='/answer' >
                     <FontAwesomeIcon id="icon" icon={faEdit}/>
                 </NavLink>
-            </div>
-            <div id="icon-div" >
-                <FontAwesomeIcon id="icon" icon={faUsers}/>
             </div>
             {!user &&
                 <div>

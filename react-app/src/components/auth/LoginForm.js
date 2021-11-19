@@ -19,11 +19,9 @@ const LoginForm = () => {
     }
   };
 
-  const enterDemoUser = (e) => {
+  const enterDemoUser = async (e) => {
     e.preventDefault();
-    setEmail("demo@aa.io")
-    setPassword("password")
-    return dispatch(login(email, password))
+    dispatch(login("demo@aa.io", "password"))
   }
 
   const updateEmail = (e) => {

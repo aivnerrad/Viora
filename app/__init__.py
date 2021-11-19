@@ -1,12 +1,10 @@
 import os
-from flask import Flask, render_template, request, session, redirect
-from flask.helpers import url_for
+from flask import Flask, request, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from app.models import question
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -68,8 +66,7 @@ def inject_csrf_token(response):
         'csrf_token',
         generate_csrf(),
         secure=True if os.environ.get('FLASK_ENV') == 'production' else False,
-        samesite='Strict' if os.environ.get(
-            'FLASK_ENV') == 'production' else None,
+        samesite='Strict' if os.environ.get('FLASK_ENV') == 'production' else None,
         httponly=True)
     return response
 
